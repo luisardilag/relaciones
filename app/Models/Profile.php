@@ -9,6 +9,10 @@ class Profile extends Model
 {
     use HasFactory;
 
+    /* 
+        Método que representa la relación entre "Profile y Location":
+        Un Perfil "tiene un solo (hasOne)" Location.
+    */
     public function location()
     {
         return $this->hasOne(Location::class);

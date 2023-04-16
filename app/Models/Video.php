@@ -8,4 +8,53 @@ use Illuminate\Database\Eloquent\Model;
 class Video extends Model
 {
     use HasFactory;
+
+        /* 
+            Método que representa la relación entre "Video y User":
+            Un Video "pertenece (belongsTo)" a un User.
+        */
+        public function user()
+        {
+            return $this->belongsTo(Post::class);
+        }
+
+
+        /* 
+            Método que representa la relación entre "Video y Category":
+            Un Video "pertenece (belongsTo)" a una Category.
+        */
+        public function category()
+        {
+            return $this->belongsTo(Category::class);
+        }
+
+
+        /* 
+            Método que representa la "relación polimórfica" entre "Video y Comentarios":
+            Nota: Se escribe en la declaración de la función en "plural"
+                  El método polimórfico es commentable, definido en la migración "comments-table".
+            Un Video se relaciona con muchos Comment a travez de el campo "commentable".
+        */
+        public function comments()
+        {
+            return $this->morphMany(Comment::class, 'commentable');
+        }
+
+
+        /* 
+            Método que representa la "relación polimórfica" entre "Video e Imágenes":
+        */
+        public function image()
+        {
+            return $this->morphOne(Image::class, 'imageable');
+        }
+
+        
+        /* 
+            Método que representa la "relación polimórfica" entre "Video e Imágenes":
+        */
+        public function tags()
+        {
+            return $this->morphToMany(Tag::class, 'taggable');
+        }
 }

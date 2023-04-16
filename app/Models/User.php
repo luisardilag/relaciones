@@ -43,6 +43,10 @@ class User extends Authenticatable
     ];
 
 
+    /* 
+        Método que representa la relación entre "User y Perfil":
+        Un Usuario "tiene un solo (hasOne)" Perfil.
+    */
     public function profile()
     {
         return $this->hasOne(Profile::class);
@@ -58,6 +62,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Group::class)->withTimestamps();
     }
 
+
+    /* 
+        Método que representa la relación entre "Usuario y Localización":
+        Un Usuario tiene una Localización "a travez de (belongsTo)".
+    */
     public function location()
     {
         return $this->hasOneThrough(Location::class, Profile::class);
