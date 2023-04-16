@@ -52,11 +52,21 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
+
+    /* 
+        Método que representa la relación entre "User y Level":
+        Un Usuario "pertenece a (belongsTo)" un Level.
+    */
     public function level()
     {
         return $this->belongsTo(Level::class);
     }
 
+
+    /* 
+        Método que representa la relación entre "User y Group":
+        Un Usuario "tiene una relación muchos a muchos (belongsToMany)" con un Group.
+    */
     public function groups()
     {
         return $this->belongsToMany(Group::class)->withTimestamps();
@@ -70,6 +80,46 @@ class User extends Authenticatable
     public function location()
     {
         return $this->hasOneThrough(Location::class, Profile::class);
+    }
+
+
+    /* 
+        Método que representa la relación entre "User y Post":
+        Un Usuario "tiene muchos (hasMany)" Posts.
+    */
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+
+    /* 
+        Método que representa la relación entre "User y Post":
+        Un Usuario "tiene muchos (hasMany)" Posts.
+    */
+    public function videos()
+    {
+        return $this->hasMany(Video::class);
+    }
+
+
+    /* 
+        Método que representa la relación entre "User y Post":
+        Un Usuario "tiene muchos (hasMany)" Posts.
+    */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+
+    /* 
+        Método que representa la "relación polimórfica" entre "Usuario e Imágenes":
+        Un Usuario va a tener una imagen de perfil
+    */
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
 
 }

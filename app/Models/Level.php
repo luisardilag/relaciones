@@ -27,4 +27,14 @@ class Level extends Model
     {
         return $this->hasManyThrough(Post::class, User::class);
     }
+
+
+    /* 
+        Método que representa la relación entre "Level y Videos":
+        Un Level tiene muchos Videos "a travez de (belongsTo)" Usuarios.
+    */
+    public function videos()
+    {
+        return $this->hasManyThrough(Video::class, User::class);
+    }
 }
