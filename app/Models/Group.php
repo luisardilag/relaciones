@@ -9,6 +9,10 @@ class Group extends Model
 {
     use HasFactory;
 
+    /* 
+        Método que representa la relación que pertenece a.
+        Un Grupo puede tener muchos Users
+    */
     public function users()
     {
         return $this->belongsToMany(User::class)->withTimestamps();
